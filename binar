@@ -1,0 +1,43 @@
+def to_binary(num, bits):
+    arr = [0]*bits
+
+    for number in range(bits-1, -1, -1):
+        if(num >= 2**number):
+            arr[number] = 1
+            num = num - 2**number
+    
+    return arr
+
+def complementary_to_one(arr):
+    for i in range(len(arr)):
+        if(arr[i] == 0):
+            arr[i]=1
+        elif arr[i] == 1:
+            arr[i] = 0
+    return arr
+    
+def complementary_to_two(arr):
+    new_arr = complementary_to_one(arr)
+    addition = 1
+    for i in range(len(new_arr)):
+        if new_arr[i] == 0 and addition == 1:
+            new_arr[i] = 1
+            addition = 0
+        elif addition == 1:
+            new_arr[i]=0
+
+    return new_arr[::-1]
+        
+
+print("------------------------------------------------------------------------------------------------")
+num = int(input("enter a number: "))
+bits = int(input("enter mum of bits: "))
+
+binar_num = to_binary(num,bits)
+
+negative_number = -num
+negative_binar_number = complementary_to_two(binar_num)
+print(f"""------------------------------------------------------------------------------------------------
+      number -           {num}    binar number -          {binar_num}
+      negative number - {-num}    binar negative number - {negative_binar_number}
+------------------------------------------------------------------------------------------------""")
